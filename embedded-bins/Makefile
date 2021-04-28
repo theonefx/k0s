@@ -7,7 +7,7 @@ TARGET_OS ?= linux
 export TARGET_OS
 
 bindir = staging/${TARGET_OS}/bin
-posix_bins = runc kubelet containerd containerd-shim containerd-shim-runc-v1 containerd-shim-runc-v2 kube-apiserver kube-scheduler kube-controller-manager etcd kine konnectivity-server
+posix_bins = runc kubelet containerd containerd-shim containerd-shim-runc-v1 containerd-shim-runc-v2 kube-apiserver kube-scheduler kube-controller-manager etcd kine konnectivity-server ctr
 windows_bins = kubelet.exe kube-proxy.exe
 buildmode = docker
 
@@ -48,7 +48,7 @@ containers: $(images:%=.container.%)
 docker-images: $(images:%=.docker-image.%.stamp)
 
 $(bindir)/runc: .container.runc
-$(bindir)/containerd $(bindir)/containerd-shim $(bindir)/containerd-shim-runc-v1 $(bindir)/containerd-shim-runc-v2: .container.containerd
+$(bindir)/containerd $(bindir)/containerd-shim $(bindir)/containerd-shim-runc-v1 $(bindir)/containerd-shim-runc-v2 $(bindir)/ctr: .container.containerd
 $(bindir)/etcd: .container.etcd
 $(bindir)/kine: .container.kine
 $(bindir)/konnectivity-server: .container.konnectivity
@@ -96,7 +96,7 @@ kine_url = https://github.com/k3s-io/kine/releases/download/v$(kine_version)/kin
 containerd_url = https://github.com/containerd/containerd/releases/download/v$(containerd_version)/containerd-$(containerd_version)-linux-$(arch).tar.gz
 etcd_url = https://github.com/etcd-io/etcd/releases/download/v$(etcd_version)/etcd-v$(etcd_version)-linux-$(arch).tar.gz
 
-containerd_extract = bin/containerd bin/containerd-shim bin/containerd-shim-runc-v1 bin/containerd-shim-runc-v2
+containerd_extract = bin/containerd bin/containerd-shim bin/containerd-shim-runc-v1 bin/containerd-shim-runc-v2 bin/ctr
 etcd_extract = etcd-v$(etcd_version)-linux-$(arch)/etcd
 
 tmpdir ?= .tmp

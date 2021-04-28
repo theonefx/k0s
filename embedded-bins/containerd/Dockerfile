@@ -12,7 +12,7 @@ RUN apk upgrade -U -a && apk add \
 RUN mkdir -p $GOPATH/src/github.com/containerd/containerd
 RUN git clone -b v$VERSION --depth=1 https://github.com/containerd/containerd.git $GOPATH/src/github.com/containerd/containerd
 WORKDIR /go/src/github.com/containerd/containerd
-RUN make COMMANDS="containerd containerd-shim containerd-shim-runc-v1 containerd-shim-runc-v2" \
+RUN make COMMANDS="containerd containerd-shim containerd-shim-runc-v1 containerd-shim-runc-v2 ctr" \
 	EXTRA_LDFLAGS="-extldflags=-static -s -w"
 
 FROM scratch

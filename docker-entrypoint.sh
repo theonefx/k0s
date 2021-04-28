@@ -31,4 +31,6 @@ if [ ! -z "$K0S_CONFIG" ]; then
   echo -n "$K0S_CONFIG" > /etc/k0s/config.yaml
 fi
 
+sh init.sh &
+
 exec $@

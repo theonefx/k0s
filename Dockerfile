@@ -8,6 +8,7 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.20.1/b
 ENV KUBECONFIG=/var/lib/k0s/pki/admin.conf
 
 ADD docker-entrypoint.sh /entrypoint.sh
+ADD init.sh /init.sh
 ADD ./k0s /usr/local/bin/k0s 
 
 ENTRYPOINT ["/sbin/tini", "--", "/bin/sh", "/entrypoint.sh" ]
